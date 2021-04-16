@@ -1,0 +1,95 @@
+.contacts-heading {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.list-group-item {
+  list-style-type: none;
+}
+
+.name {
+  font-size: 14px;
+  color: #33393e;
+  margin-bottom: 2px;
+}
+
+.details {
+  font-size: 12.8px;
+  color: #33393e;
+  margin-bottom: 2px;
+}
+
+.card {
+  border-radius: 0px;
+}
+
+.add-button {
+  background-color: #27a746;
+  width: 100px;
+  height: 35px;
+  padding-bottom: 10px;
+  padding-top: 4px;
+  border-radius: 5px;
+  border: 1px solid green;
+  font-weight: 400;
+  margin-left: 409px;
+  margin-bottom: 10px;
+}
+
+textarea {
+  border: 1px solid #d3d4d8;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  height: 70px;
+  width: 400px;
+}
+
+.input-contact {
+  width: 200px;
+  border: 1px solid #d3d4d8;
+  border-radius: 4px;
+  height: 30px;
+}
+
+.mobile {
+  display: inline-block;
+  margin-right: 15px;
+  width: 192px;
+}
+
+.landline {
+  display: inline-block;
+  width: 192px;
+}
+
+.website {
+  margin-top: 10px;
+  width: 400px;
+}
+
+.label {
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 7px;
+}
+
+.imp {
+  color: red;
+}
+
+.input {
+  width: 400px;
+  border: 1px solid #d3d4d8;
+  border-radius: 4px;
+  height: 30px;
+  margin-bottom: 9px;
+}
+
+.col-9 {
+  padding: 20px;
+  width: 547px;
+  -webkit-box-shadow: 0px 0px  12px 4px gray;
+          box-shadow: 0px 0px  12px 4px gray;
+  margin-left: 27px;
+}
+/*# sourceMappingURL=add.component.css.map */

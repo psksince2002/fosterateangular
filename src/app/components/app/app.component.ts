@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {DataService} from '../../career/service';
+
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'fosterateangular';
+  constructor(public ds:DataService){
+    //this.navstatus=this.ds.navstatus
+
+   }
 }

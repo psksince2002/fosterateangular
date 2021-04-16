@@ -1,0 +1,93 @@
+.contacts-heading {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.list-group-item {
+  list-style-type: none;
+}
+
+.name {
+  font-size: 14px;
+  color: #33393e;
+  margin-bottom: 2px;
+}
+
+.details {
+  font-size: 12.8px;
+  color: #33393e;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+.active-item {
+  background-color: #cfe7f3;
+}
+
+.card {
+  border-radius: 0px;
+}
+
+.data-list {
+  list-style-type: none;
+}
+
+.col-4 {
+  margin-top: 32px;
+}
+
+.-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.-info {
+  font-size: 12px;
+}
+
+.-landline-website {
+  font-size: 12px;
+}
+
+.-address {
+  font-size: 12px;
+}
+
+.left-space {
+  margin-left: 50px;
+}
+
+.-label {
+  color: #212500;
+  font-size: 13px;
+  display: inline-block;
+}
+
+.edit-part {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.delete-part {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.blog-icon {
+  width: 18px;
+  height: 18px;
+  float: right;
+  margin-top: 5px;
+}
+
+.edit-img {
+  width: 16px;
+  cursor: pointer;
+}
+
+.delete-img {
+  width: 16px;
+  margin-top: 2px;
+  cursor: pointer;
+}
+/*# sourceMappingURL=home.component.css.map */

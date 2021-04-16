@@ -1,0 +1,80 @@
+<div class="row mt-3 ms-3">
+  <div class="col-2">
+    <p class="contacts-heading">CONTACTS</p>
+    <div class="card">
+      <ul class="list-group list-group-flush">
+        <!--<ul class="list-group-item ">
+           <li class="name ">Harsha Vardhan Pendyala</li>
+           <li class="details ">7777888855</li>
+           <li class="details ">harsha@fosterate.com</li>
+        </ul>
+        <ul class="list-group-item">
+          <li class="name ">Network Duke</li>
+          <li class="details ">7777888855</li>
+          <li class="details ">duke@fosterate.com</li>
+        </ul>
+        <ul class="list-group-item">
+          <li class="name ">Arshaque Mohammed</li>
+          <li class="details ">7777888855</li>
+          <li class="details ">arshaque@fosterate.com</li>
+        </ul>-->
+        <ul class="list-group-item" *ngFor="let contact of contact_list"  >
+
+          <li class="name" id="name">{{contact.name}}</li>
+          <li class="details" id="number">{{contact.number}}</li>
+          <li class="details" id="mail">{{contact.mail}}</li>
+          <!--<li class="details" id="landline" *ngIf="contact.landline!=null">{{contact.landline}}</li>
+          <li class="details" id="website" *ngIf="contact.website!=null">{{contact.website}}</li>
+          <li class="details" id="address" *ngIf="contact.address!=null">{{contact.address}}</li>-->
+
+        </ul>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-9 mt-3 ">
+    <form action="" class="" id="form" [formGroup]="addform" (ngSubmit)="onSubmit()">
+      <label  class="label" for="input-name">Name<span class="imp me-1">*</span><span  class="imp" *ngIf="addform.get('name')!.invalid && (addform.get('name')!.touched||addform.get('name')!.dirty)" >name field is required</span></label><br>
+      <input type="text" class="input " id="input-name" formControlName="name"><br>
+     <!-- <div class="alert alert-danger " *ngIf="addform.get('name')!.invalid && (addform.get('name')!.touched||addform.get('name')!.dirty)">
+        name field is required
+      </div>-->
+      <label class="label" for="input-mail">Email<span class="imp me-1">*</span><span class="imp" *ngIf="addform.get('mail')!.errors?.required && (addform.get('mail')!.touched||addform.get('mail')!.dirty)">email field is required</span><span class="imp" *ngIf="addform.get('mail')!.errors?.email && (addform.get('mail')!.touched||addform.get('mail')!.dirty)">not an email format</span></label><br>
+      <input type="mail" class="input" id="input-mail" formControlName="mail"><br>
+      <!--<div class="alert alert-danger" *ngIf="addform.get('mail')!.errors?.required && (addform.get('mail')!.touched||addform.get('mail')!.dirty)">
+        email field is required
+      </div>
+      <div class="alert alert-danger" *ngIf="addform.get('mail')!.errors?.email && (addform.get('mail')!.touched||addform.get('mail')!.dirty)">
+        not an email format
+      </div>-->
+      <div class="mobile">
+        <label for="input-mobile" class="label">Mobile<span class="imp me-1">*</span><span class="imp" *ngIf="addform.get('number')!.errors?.required && (addform.get('number')!.touched|| addform.get('number')!.dirty)">number field is required</span><span class="imp" *ngIf="(addform.get('number')!.errors?.minlength || addform.get('number')!.errors?.maxlength) && (addform.get('number')!.touched|| addform.get('number')!.dirty)">number field should exactly contain 10 digits</span></label><br>
+        <input type="text" class="input-contact" id="input-mobile" formControlName="number"><br>
+      </div>
+      <!--<div class="alert alert-danger" *ngIf="addform.get('number')!.errors?.required && (addform.get('number')!.touched|| addform.get('number')!.dirty)">
+        number field is required
+      </div>
+      <div class="alert alert-danger" *ngIf="(addform.get('number')!.errors?.minlength || addform.get('number')!.errors?.maxlength) && (addform.get('number')!.touched|| addform.get('number')!.dirty)">
+        number field should exactly contain 10 digits
+      </div>-->
+      <div class="landline">
+        <label for="input-landline" class="label">Landline</label><br>
+        <input type="text" class="input-contact" id="input-landline" formControlName="landline"><br>
+     </div>
+     <br>
+      <div class="website">
+      <label for="input-website" class="label">Website</label><br>
+      <input type="text" class="input" id="input-website" formControlName="website"><br>
+     </div>
+     <div class="address">
+       <label for="address" class="label">Address</label><br>
+       <textarea rows="4" cols="54" id="address" formControlName="address"></textarea>
+     </div>
+     <button class="add-button" type="submit" id="addbutton" >Add</button>
+     <!--<button class="add-button" type="submit" id="addbutton" *ngIf="buttonstatus==false">Edit</button>-->
+     <div class="alert alert-danger" *ngIf="formStatus==true">Invalid entries</div>
+
+     <!--<button class="edit-button" type="button" id="editbutton" onclick="afterEdit()">Edit</button>-->
+    </form>
+  </div>
+</div>
