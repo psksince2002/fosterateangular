@@ -2,15 +2,18 @@ import { Injectable } from '@angular/core';
 
 import {Router} from '@angular/router';
 
+import {Employee} from '../model';
+
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-   count=3;
+   count=0;
 
-  buttonstatus:boolean=true
+  buttonstatus:boolean=true;
   navstatus:boolean=true
+  editstatus:boolean=false;
    name=''
    mail=''
    number=''
@@ -20,84 +23,61 @@ export class DataService {
 
 
 
-  contact_list=[{
-    name:"Harsha Vardhan Pendyala",
-    number:'7777888855',
-    mail:"harsha@fosterate.com",
-    id:1,
-    status:true,
-    landline:'',
-    website:'',
-    address:'',
-    address1:'Hyderabad',
-    address2:'Telangana',
-    address3:'500061'
-},{
-    name:"Network Duke",
-    number:'7777888855',
-    mail:"duke@fosterate.com",
-    id:2,
-    landline:'',
-    website:'',
-    address:'',
-    status:false
-},{
- name:"Arshaque Mohammed",
- number:'7777888855',
- mail:"arshaque@fosterate.com",
- id:3,
- landline:'',
- website:'',
- address:'',
- status:false
-}]
+
+contact_list:Array<Employee>=[]
 
 constructor(private router:Router) { }
 
-  getData(){
-    return this.contact_list;
+  getData():{contactlist:Array<Employee>,status:boolean}{
+     if(this.contact_list.length==0){
+        return {contactlist:[],status:false}
+     }
+     else{
+       return {contactlist:this.contact_list,status:true}
+     }
   }
-  addUser(){
+  addUser():number{
      this.count++;
      return this.count;
   }
   search(id:any):number{
-     for(var i=0;i<this.contact_list.length;i++){
-         if(id==this.contact_list[i].id){
-            return i;
-         }
-     }
-     return -1;
+
+     var i=this.contact_list.findIndex(
+        (obj)=>obj.id==id
+     )
+     return i;
   }
 
-  boolSearch():number{
-     for(var i=0;i<this.contact_list.length;i++){
-         if(this.contact_list[i].status==true){
-               return i;
-         }
-     }
-     return -1;
+  statusSearch():number{
+    var i=this.contact_list.findIndex(
+      (obj)=>obj.status==true
+   )
+   return i;
   }
-  changeActive(obj:any){
-      var i=this.boolSearch()
+  changeActive(obj:Employee):void{
+    var i=this.statusSearch()
+    if(i!=-1){
       this.contact_list[i].status=false
+    }
       i=this.search(obj.id)
      this.contact_list[i].status=true
   }
 
-  Push(obj:any){
+  Push(obj:Employee):void{
+    if(obj!=null){
       this.contact_list.push(obj)
+    }
   }
 
-  Delete(){
-     var i=this.boolSearch()
+  Delete():void{
+     var i=this.statusSearch()
      this.contact_list[i].status=false;
      this.contact_list.splice(i,1);
      this.contact_list[0].status=true;
   }
 
-  Edit(){
-    var i=this.boolSearch()
+  Edit():void{
+    var i=this.statusSearch()
     var obj=this.contact_list[i]
     this.name=obj.name;
     this.mail=obj.mail;
@@ -112,12 +92,13 @@ constructor(private router:Router) { }
     this.address=obj.address
    }
    this.buttonstatus=false
+   this.editstatus=true
    this.router.navigateByUrl('add')
   }
 
-  Insert(obj:any){
+  Insert(obj:Employee):void{
     console.log(obj)
-    var i=this.boolSearch()
+    var i=this.statusSearch()
     this.contact_list[i].name=obj.name;
     this.contact_list[i].mail=obj.mail;
     this.contact_list[i].number=obj.number;

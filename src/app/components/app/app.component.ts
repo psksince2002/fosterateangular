@@ -10,7 +10,7 @@ import {DataService} from '../../career/service';
 })
 export class AppComponent {
   title = 'fosterateangular';
-  constructor(public ds:DataService){
+  constructor(public DataService:DataService){
     //this.navstatus=this.ds.navstatus
 
    }

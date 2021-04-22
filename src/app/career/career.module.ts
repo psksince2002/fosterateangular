@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ReactiveFormsModule} from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms'
 import { CareerRoutingModule } from './career-routing.module';
-import {AddComponent,HomeComponent} from './components'
-import {DataService} from './service'
-
+import { AddComponent, HomeComponent } from './components'
+import { DataService } from './service'
+import { Employee } from './model'
 
 @NgModule({
   declarations: [

@@ -4,7 +4,7 @@ import {DataService} from '../../service';
 import {Router} from '@angular/router';
 import {NgIf,NgForOf} from '@angular/common'
 
-console.log(DataService)
+
 
 @Component({
   selector: 'app-add',
@@ -17,34 +17,27 @@ export class AddComponent implements OnInit {
   contact_list:any=[]
   buttonstatus:boolean;
   formStatus:boolean=false;
-  constructor(private ds:DataService,private router:Router) {
+  constructor(private DataService:DataService,private router:Router) {
 
-    this.contact_list=ds.getData()
-    this.buttonstatus=this.ds.buttonstatus
-    this.ds.navstatus=false;
-    /*this.addform.value.name=this.ds.name
-    console.log(this.ds.name)
-    this.addform.value.mail=this.ds.mail
-    this.addform.value.number=this.ds.number
-    this.addform.value.landline=this.ds.landline
-    this.addform.value.website=this.ds.website
-    this.addform.value.address=this.ds.address*/
+    this.contact_list=DataService.getData().contactlist
+    this.buttonstatus=this.DataService.buttonstatus
+    this.DataService.navstatus=false;
    }
 
   addform=new FormGroup({
-      name:new FormControl(this.ds.name,Validators.required),
-      mail:new FormControl(this.ds.mail,[Validators.required,Validators.email]),
-      number:new FormControl(this.ds.number,[Validators.required,Validators.minLength(10),Validators.maxLength(10)]),
-      landline:new FormControl(this.ds.landline),
-      website:new FormControl(this.ds.website),
-      address:new FormControl(this.ds.address)
+      name:new FormControl(this.DataService.name,Validators.required),
+      mail:new FormControl(this.DataService.mail,[Validators.required,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+      number:new FormControl(this.DataService.number,[Validators.required,Validators.minLength(10),Validators.maxLength(10)]),
+      landline:new FormControl(this.DataService.landline),
+      website:new FormControl(this.DataService.website),
+      address:new FormControl(this.DataService.address)
   })
 
   ngOnInit(): void {
 
   }
 
-  onSubmit(){
+  onSubmit():void{
     if(this.addform.invalid){
        this.formStatus=true;
     }
@@ -53,7 +46,7 @@ export class AddComponent implements OnInit {
       this.afterEdit()
     }
     else{
-    var id=this.ds.addUser()
+    var id=this.DataService.addUser()
     var obj=this.addform.value
     console.log(obj)
     if(obj.address!=null){
@@ -71,8 +64,8 @@ export class AddComponent implements OnInit {
 
     obj.id=id;
     obj!.status=false;
-    this.ds.Push(obj)
-    this.ds.changeActive(obj);
+    this.DataService.Push(obj)
+    this.DataService.changeActive(obj);
     this.addform.reset()
     this.router.navigateByUrl('home')
 
@@ -80,10 +73,9 @@ export class AddComponent implements OnInit {
 }
   }
 
-  afterEdit(){
+  afterEdit():void{
 
     var obj=this.addform.value
-    console.log(obj)
     if(obj.address!=null){
       var addressList=obj.address.split(',')
       if(addressList[0]!=null){
@@ -96,9 +88,10 @@ export class AddComponent implements OnInit {
        obj.address3=addressList[2]
       }
    }
-   this.ds.Insert(obj)
+   this.DataService.Insert(obj)
 
    this.addform.reset()
+   this.DataService.editstatus=false;
    this.router.navigateByUrl('home')
 
 

@@ -21,9 +21,7 @@ $enable-negative-margins: true;
   cursor:pointer;
 }
 
-//.list-group .active{
-  // background-color:rgb(207,231,243);
-//}
+
 
 .active-item{
   background-color:rgb(207,231,243);
@@ -66,7 +64,7 @@ $enable-negative-margins: true;
   color:rgb(33,37,0);
   font-size: 13px;
   display:inline-block;
-
+  margin-left:-10px;
 }
 
 .edit-part{
@@ -91,6 +89,7 @@ $enable-negative-margins: true;
  .edit-img{
   width:16px;
   cursor:pointer;
+
  }
 
  .delete-img{
