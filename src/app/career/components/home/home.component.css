@@ -61,6 +61,7 @@
   color: #212500;
   font-size: 13px;
   display: inline-block;
+  margin-left: -10px;
 }
 
 .edit-part {

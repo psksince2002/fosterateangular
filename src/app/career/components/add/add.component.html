@@ -1,14 +1,14 @@
 <div class="row mt-3 ms-3">
   <div class="col-2">
-    <div *ngIf="contact_list.length!=0">
+    <div *ngIf="ContactList.length!=0">
     <p class="contacts-heading">CONTACTS</p>
     <div class="card">
       <ul class="list-group list-group-flush">
-        <ul class="list-group-item" *ngFor="let contact of contact_list"  >
+        <ul class="list-group-item" *ngFor="let contact of ContactList"  >
 
-          <li class="name" id="name">{{contact.name}}</li>
-          <li class="details" id="number">{{contact.number}}</li>
-          <li class="details" id="mail">{{contact.mail}}</li>
+          <li class="name" id="name">{{ contact.name }}</li>
+          <li class="details" id="number">{{ contact.number }}</li>
+          <li class="details" id="mail">{{ contact.mail }}</li>
         </ul>
       </ul>
     </div>
@@ -16,13 +16,13 @@
   </div>
 
   <div class="col-9 mt-3 ">
-    <form action="" class="" id="form" [formGroup]="addform" (ngSubmit)="onSubmit()">
-      <label  class="label" for="input-name">Name<span class="imp1 me-1">*</span><span  class="imp" *ngIf="addform.get('name')!.invalid && (addform.get('name')!.touched||addform.get('name')!.dirty)" >name field is required</span></label><br>
+    <form action="" class="" id="form" [formGroup]="AddForm" (ngSubmit)="onSubmit()">
+      <label  class="label" for="input-name">Name<span class="imp1 me-1">*</span><span  class="imp" *ngIf="AddForm.get('name')!.invalid && (AddForm.get('name')!.touched||AddForm.get('name')!.dirty)" >name field is required</span></label><br>
       <input type="text" class="input " id="input-name" formControlName="name"><br>
-      <label class="label" for="input-mail">Email<span class="imp1 me-1">*</span><span class="imp" *ngIf="addform.get('mail')!.errors?.required && (addform.get('mail')!.touched||addform.get('mail')!.dirty)">email field is required</span><span class="imp" *ngIf="addform.get('mail')!.errors?.pattern && (addform.get('mail')!.touched||addform.get('mail')!.dirty)">not an email format</span></label><br>
+      <label class="label" for="input-mail">Email<span class="imp1 me-1">*</span><span class="imp" *ngIf="AddForm.get('mail')!.errors?.required && (AddForm.get('mail')!.touched||AddForm.get('mail')!.dirty)">email field is required</span><span class="imp" *ngIf="AddForm.get('mail')!.errors?.pattern && (AddForm.get('mail')!.touched||AddForm.get('mail')!.dirty)">not an email format</span></label><br>
       <input type="mail" class="input" id="input-mail" formControlName="mail"><br>
       <div class="mobile">
-        <label for="input-mobile" class="label">Mobile<span class="imp1 me-1">*</span><span class="imp" *ngIf="addform.get('number')!.errors?.required && (addform.get('number')!.touched|| addform.get('number')!.dirty)">number field is required</span><span class="imp" *ngIf="(addform.get('number')!.errors?.minlength || addform.get('number')!.errors?.maxlength ) && (addform.get('number')!.touched|| addform.get('number')!.dirty)">not a mobile number</span></label><br>
+        <label for="input-mobile" class="label">Mobile<span class="imp1 me-1">*</span><span class="imp" *ngIf="AddForm.get('number')!.errors?.required && (AddForm.get('number')!.touched|| AddForm.get('number')!.dirty)">number field is required</span><span class="imp" *ngIf="(AddForm.get('number')!.errors?.minlength || AddForm.get('number')!.errors?.maxlength ) && (AddForm.get('number')!.touched|| AddForm.get('number')!.dirty)">not a mobile number</span></label><br>
         <input type="text" class="input-contact" id="input-mobile" formControlName="number"><br>
       </div>
       <div class="landline">
@@ -39,7 +39,7 @@
        <textarea rows="4" cols="54" id="address" formControlName="address"></textarea>
      </div>
      <button class="add-button" type="submit" id="addbutton" >Add</button>
-     <div class="alert alert-danger" *ngIf="formStatus==true">Invalid entries</div>
+     <div class="alert alert-danger" *ngIf="FormStatus==true">Invalid entries</div>
 
     </form>
   </div>

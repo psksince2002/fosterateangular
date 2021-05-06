@@ -1,0 +1,46 @@
+<div class="row mt-3 ms-3">
+  <div class="col-2">
+    <div *ngIf="contactList.length!=0">
+    <p class="contacts-heading">CONTACTS</p>
+    <div class="card">
+      <ul class="list-group list-group-flush">
+        <ul class="list-group-item" *ngFor="let contact of contactList"  >
+
+          <li class="name" id="name">{{ contact.name }}</li>
+          <li class="details" id="number">{{ contact.number }}</li>
+          <li class="details" id="mail">{{ contact.mail }}</li>
+        </ul>
+      </ul>
+    </div>
+  </div>
+  </div>
+
+  <div class="col-9 mt-3 ">
+    <form action="" class="" id="form" [formGroup]="addform" (ngSubmit)="onSubmit()">
+      <label  class="label" for="input-name">Name<span class="imp1 me-1">*</span><span  class="imp" *ngIf="addform.get('name')!.invalid && (addform.get('name')!.touched||addform.get('name')!.dirty)" >name field is required</span></label><br>
+      <input type="text" class="input " id="input-name" formControlName="name"><br>
+      <label class="label" for="input-mail">Email<span class="imp1 me-1">*</span><span class="imp" *ngIf="addform.get('mail')!.errors?.required && (addform.get('mail')!.touched||addform.get('mail')!.dirty)">email field is required</span><span class="imp" *ngIf="addform.get('mail')!.errors?.pattern && (addform.get('mail')!.touched||addform.get('mail')!.dirty)">not an email format</span></label><br>
+      <input type="mail" class="input" id="input-mail" formControlName="mail"><br>
+      <div class="mobile">
+        <label for="input-mobile" class="label">Mobile<span class="imp1 me-1">*</span><span class="imp" *ngIf="addform.get('number')!.errors?.required && (addform.get('number')!.touched|| addform.get('number')!.dirty)">number field is required</span><span class="imp" *ngIf="(addform.get('number')!.errors?.minlength || addform.get('number')!.errors?.maxlength ) && (addform.get('number')!.touched|| addform.get('number')!.dirty)">not a mobile number</span></label><br>
+        <input type="text" class="input-contact" id="input-mobile" formControlName="number"><br>
+      </div>
+      <div class="landline">
+        <label for="input-landline" class="label">Landline</label><br>
+        <input type="text" class="input-contact" id="input-landline" formControlName="landline"><br>
+     </div>
+     <br>
+      <div class="website">
+      <label for="input-website" class="label">Website</label><br>
+      <input type="text" class="input" id="input-website" formControlName="website"><br>
+     </div>
+     <div class="address">
+       <label for="address" class="label">Address</label><br>
+       <textarea rows="4" cols="54" id="address" formControlName="address"></textarea>
+     </div>
+     <button class="add-button" type="submit" id="addbutton" >Edit</button>
+     <div class="alert alert-danger" *ngIf="formStatus==true">Invalid entries</div>
+
+    </form>
+  </div>
+</div>

@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { DataService } from './career/service'
+import { EmployeeService } from './career/service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent, NavComponent } from './components';
 import { CareerModule } from './career/career.module';
+import {CareerRoutingModule} from './career/career-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -19,9 +20,10 @@ import { CommonModule } from '@angular/common';
     AppRoutingModule,
     ReactiveFormsModule,
     CommonModule,
-    CareerModule
+   CareerModule,
+    CareerRoutingModule
   ],
-  providers: [DataService],
+  providers: [EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

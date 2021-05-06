@@ -1,7 +1,7 @@
-import { Component, OnInit ,ElementRef} from '@angular/core';
-import {DataService} from '../../service'
-import {NgIf,NgForOf} from '@angular/common'
-
+import { Component, OnInit } from '@angular/core';
+import {EmployeeService} from '../../service';
+import {Router} from '@angular/router';
+import {Employee} from '../../model/';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,33 +9,32 @@ import {NgIf,NgForOf} from '@angular/common'
 })
 export class HomeComponent implements OnInit {
 
-  contact_list:any=[]
+  contactList: any = [];
+  activeObj!: Employee;
 
-  constructor(private elementRef:ElementRef,private DataService:DataService) {
-        //obj.classList.add('active-item')
-        this.contact_list=this.DataService.getData().contactlist
-        this.DataService.name=''
-        this.DataService.navstatus=true
-   this.DataService.mail=''
-   this.DataService.number=''
-   this.DataService.landline=''
-   this.DataService.website=''
-   this.DataService.address=''
+  constructor( private employeeService: EmployeeService, private router: Router) {
+        // obj.classList.add('active-item')
+        this.contactList = this.employeeService.getData().contactlist;
+        this.activeObj = this.contactList.find((obj: Employee) => obj.status);
+
+
   }
+
   ngOnInit(): void {
   }
 
-
-
-  onListItemClick(obj:any):void{
-
-    this.DataService.changeActive(obj);
+  onClick(Employeeobject: any): void{
+     this.employeeService.changeActive(Employeeobject);
+     // this.activeObj = this.contactList.find((Employeeobject: Employee) => Employeeobject.status);
+     this.activeObj = this.contactList.find((object: Employee) => object.status);
   }
 
-  afterDelete():void{
-      this.DataService.Delete();
+  afterDelete(): void{
+      this.employeeService.deleteEmployeeData();
+      this.activeObj = this.contactList.find((obj: Employee) => obj.status);
   }
-  afterEdit():void{
-    this.DataService.Edit();
+
+  afterEdit(): void{
+    this.router.navigateByUrl('edit');
   }
 }

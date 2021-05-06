@@ -1,23 +1,28 @@
 export class Employee {
 
-  name:string;
-  mail:string;
-  number:string;
-  landline:string;
-  website:string;
-  address:string;
-  id:number=0;
-  status:boolean=false;
-  address1:string="";
-  address2:string="";
-  address3:string="";
+  name: string;
+  mail: string;
+  number: string;
+  landline: string;
+  website: string;
+  address: string;
+  id: number;
+  status: boolean;
+  address1: string;
+  address2: string;
+  address3: string;
 
-  constructor(name:string,mail:string,number:string,landline:string,website:string,address:string){
-    this.name=name;
-    this.mail=mail;
-    this.number=number;
-    this.landline=landline;
-    this.website=website;
-    this.address=address;
+  constructor(args: any){
+    this.name = args.name;
+    this.mail = args.mail;
+    this.number = args.number;
+    this.landline = args.landline;
+    this.website = args.website;
+    this.address = args.address;
+    this.id = 0;
+    this.status = false;
+    this.address1 = '';
+    this.address2 = '';
+    this.address3 = '';
   }
 }

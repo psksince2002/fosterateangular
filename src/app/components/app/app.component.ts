@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {DataService} from '../../career/service';
+
 
 
 
@@ -10,8 +10,8 @@ import {DataService} from '../../career/service';
 })
 export class AppComponent {
   title = 'fosterateangular';
-  constructor(public DataService:DataService){
-    //this.navstatus=this.ds.navstatus
+  constructor(){
+
 
    }
 }

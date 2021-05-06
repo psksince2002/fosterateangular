@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DataService} from '../../career/service';
+import {RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -8,7 +8,7 @@ import {DataService} from '../../career/service';
 })
 export class NavComponent implements OnInit {
 
-  constructor(public DataService:DataService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
