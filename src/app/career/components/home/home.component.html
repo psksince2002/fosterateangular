@@ -3,8 +3,8 @@
     <p class="contacts-heading">CONTACTS</p>
     <div class="card">
       <ul class="list-group list-group-flush" >
-        <ul class="list-group-item " *ngFor="let contact of contactList"  [ngClass]="{'active-item':contact.status==true}">
-          <div (click)="onClick(contact)" >
+        <ul class="list-group-item " *ngFor="let contact of contactList"  [ngClass]="{'active-item':contact.id==activeObj.id}"  routerLinkActive="active" >
+          <div (click)="changeActiveContact(contact)" >
           <li class="name" id="name">{{ contact.name }}</li>
           <li class="details" id="number">{{ contact.number }}</li>
           <li class="details" id="mail">{{ contact.mail }}</li>
@@ -20,13 +20,13 @@
       <li class="info mb-1">Mobile: <span class="-info" id="-mobile">{{ activeObj.number }}</span></li>
       <li class="landline-website mb-1" >Landline: <span class="-landline-website" id="-landline">{{ activeObj.landline }}</span></li>
       <li class="landline-website mb-1" >Website: <span class="-landline-website" id="-website">{{ activeObj.website }}</span></li>
-      <li class="address">Address: <span class="address" id="-address1">{{ activeObj.address1 }}</span><br><span class="left-space" id="-address2">{{activeObj.address2}}</span><br><span class="left-space" id="-address3">{{activeObj.address3}}</span></li>
+      <li class="address "><span class="address-label">Address: </span><pre  id="-address1">{{ activeObj.address }}</pre></li>
     </ul>
   </div>
   <div class="col-6 mt-4">
     <div class="edit-part" >
       <img src="./../assets/images/Edit-icon.png" alt="" class="edit-img" >
-      <a class="label nav-link "  id="edit" [routerLink]="['/home/edit']"  >EDIT</a>
+      <a class="label nav-link "  id="edit" (click)="afterEdit()" >EDIT</a>
     </div>
     <div class="delete-part" >
       <img src="./../assets/images/delete2.png" alt="" class="delete-img" >

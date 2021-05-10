@@ -20,7 +20,7 @@ import { BrowserModule } from '@angular/platform-browser';
     ReactiveFormsModule,
     BrowserModule
   ],
-  providers: [EmployeeService]
+  providers: []
 
 })
 export class CareerModule { }

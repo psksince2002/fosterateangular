@@ -13,6 +13,8 @@ export class EmployeeService {
 
 contactList: Array<Employee>  ;
 
+active_obj!:any;
+
 constructor(private router: Router) {
   this.contactList = [];
 }
@@ -31,7 +33,7 @@ constructor(private router: Router) {
      return this.count;
   }
 
-  search(id: any): number{
+  searchContact(id: any): number{
 
      const i = this.contactList.findIndex(
         (obj) => obj.id === id
@@ -47,12 +49,25 @@ constructor(private router: Router) {
   }
 
   changeActive(Employeeobject: Employee): void{
-    let i = this.statusSearch();
+   /* let i = this.statusSearch();
     if (i !== -1){
       this.contactList[i].status = false;
-    }
-    i = this.search(Employeeobject.id);
+    }*/
+    let i = this.searchContact(Employeeobject.id);
     this.contactList[i].status = true;
+    var id:number
+    if(this.active_obj!=null){
+       id  = this.active_obj.id;
+       i = this.searchContact(id);
+    }
+   // console.log(id)
+    if (i !== -1){
+      console.log("in the zone")
+      this.contactList[i].status = false;
+    }
+
+    this.active_obj=Employeeobject
+
   }
 
   addEmployeeData(Employeeobject: Employee): void{
@@ -61,22 +76,29 @@ constructor(private router: Router) {
     }
   }
 
-  deleteEmployeeData(): void{
-     const i = this.statusSearch();
+  deleteEmployeeData(Employeeobject: Employee): void{
+     const i = this.searchContact(Employeeobject.id);
      this.contactList[i].status = false;
      this.contactList.splice(i, 1);
-     console.log(this.contactList[0])
-     this.contactList[0].status = true;
+     if(this.contactList.length!=0){
+      this.active_obj=this.contactList[0]
+      this.contactList[0].status = true;
+     }
+     else{
+       this.active_obj=null;
+     }
+
   }
 
 
   changeEmployeeData(Employeeobject: Employee): void{
 
     if (Employeeobject != null){
-    const i = this.statusSearch();
+    const i = this.searchContact(this.active_obj.id);
     Employeeobject.id = this.contactList[i].id;
     Employeeobject.status = this.contactList[i].status;
     this.contactList[i] = Employeeobject;
+    this.active_obj=this.contactList[i] 
     }
 
 

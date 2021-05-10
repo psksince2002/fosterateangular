@@ -62,14 +62,15 @@ export class EditComponent implements OnInit {
        }
         this.employeeService.changeEmployeeData(Employeeobject);
         this.addform.reset();
-        this.router.navigateByUrl('home');
+        this.router.navigate(['contacts', this.employeeService.active_obj.id]);
        }
       }
 
 
   ngOnInit(): void {
     this.contactList = this.employeeService.getData().contactlist;
-    this.targetObj = this.contactList[this.employeeService.statusSearch()];
+    this.targetObj = this.employeeService.active_obj;
+    console.log(this.targetObj)
     this.intilaiseForm();
   }
 

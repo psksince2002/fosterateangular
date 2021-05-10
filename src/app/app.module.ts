@@ -23,7 +23,7 @@ import { CommonModule } from '@angular/common';
    CareerModule,
     CareerRoutingModule
   ],
-  providers: [EmployeeService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

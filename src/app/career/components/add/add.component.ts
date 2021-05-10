@@ -80,7 +80,7 @@ export class AddComponent implements OnInit {
     this.employeeService.addEmployeeData(Employeeobject);
     this.employeeService.changeActive(Employeeobject);
     this.AddForm.reset();
-    this.router.navigateByUrl('home');
+    this.router.navigate(['contacts', Employeeobject.id]);
 
 }
   }

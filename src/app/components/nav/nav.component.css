@@ -26,4 +26,10 @@
   font-size: 13px;
   font-weight: boldw;
 }
+
+.blog-icon {
+  height: 20px;
+  width: 20px;
+  margin-bottom: 2.5px;
+}
 /*# sourceMappingURL=nav.component.css.map */
