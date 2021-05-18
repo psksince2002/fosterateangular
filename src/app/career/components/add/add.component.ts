@@ -61,7 +61,7 @@ export class AddComponent implements OnInit {
     }
     else{
     const Employeeobject = this.AddForm.value;
-    var id=this.ContactList.length+1
+
     if (Employeeobject.address != null){
       const addressList = Employeeobject.address.split(',');
       if (addressList[0] != null){
@@ -74,7 +74,6 @@ export class AddComponent implements OnInit {
         Employeeobject.address3 = addressList[2];
       }
    }
-    Employeeobject.id=id;
     Employeeobject.status = false;
     this.employeeService.addEmployeeData(Employeeobject);
     this.employeeService.changeActive(Employeeobject);

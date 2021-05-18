@@ -30,9 +30,9 @@ constructor(private router: Router,private firestore: AngularFirestore,private a
     this.contactList=this.pushData().contactlist
 }
 
-  getData(): Observable<any>{
+  getData(): Observable<{contactlist:Array<Employee>,status:boolean}>{
      const contactList=new Array<Employee>();
-     return new Observable<any>((sub)=>{
+     return new Observable<{contactlist:Array<Employee>,status:boolean}>((sub)=>{
        this.firestore.collection('employee').get().subscribe((empList)=>{
           if(empList){
               empList.forEach((empObject)=>{
@@ -40,7 +40,10 @@ constructor(private router: Router,private firestore: AngularFirestore,private a
                   currentemployee['key']=empObject.id;
                  contactList.push(currentemployee)
               })
-              sub.next(contactList);
+              sub.next({contactlist:contactList,status:true});
+          }
+          else{
+            sub.next({contactlist:null,status:false})
           }
        });
      })
@@ -98,23 +101,14 @@ constructor(private router: Router,private firestore: AngularFirestore,private a
 
   }
 
-  addEmployeeData(Employeeobject: Employee): void{
-    if (Employeeobject != null){
+  addEmployeeData(newContact: Employee): void{
+    if (newContact != null){
       //this.contactList.push(Employeeobject);
-      this.firestore.collection('employee').add({
-          id:Employeeobject.id,
-          status:Employeeobject.status,
-          name:Employeeobject.name,
-          mail:Employeeobject.mail,
-          number:Employeeobject.number,
-          landline:Employeeobject.landline,
-          website:Employeeobject.website,
-          address:Employeeobject.address,
-          address1:Employeeobject.address1,
-          address2:Employeeobject.address2,
-          address3:Employeeobject.address3
-      })
-      this.contactList=this.pushData().contactlist
+      newContact['id']=this.firestore.createId()
+      this.firestore.collection('employee').doc(newContact.id).set(
+           newContact
+      )
+      //this.contactList=this.pushData().contactlist
     }
   }
 

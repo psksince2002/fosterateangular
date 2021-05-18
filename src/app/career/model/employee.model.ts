@@ -11,7 +11,6 @@ export class Employee {
   address1: string;
   address2: string;
   address3: string;
-  key!:string;
 
   constructor(args: any){
     this.id = args.id;
