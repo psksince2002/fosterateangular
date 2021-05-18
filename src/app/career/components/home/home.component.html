@@ -3,7 +3,7 @@
     <p class="contacts-heading">CONTACTS</p>
     <div class="card">
       <ul class="list-group list-group-flush" >
-        <ul class="list-group-item " *ngFor="let contact of contactList"  [ngClass]="{'active-item':contact.id==activeObj.id}"  routerLinkActive="active" >
+        <ul class="list-group-item " *ngFor="let contact of contactList"  [ngClass]="{'active-item':contact.status==true}"  routerLinkActive="active" >
           <div (click)="changeActiveContact(contact)" >
           <li class="name" id="name">{{ contact.name }}</li>
           <li class="details" id="number">{{ contact.number }}</li>

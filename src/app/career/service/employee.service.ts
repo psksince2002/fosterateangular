@@ -4,33 +4,65 @@ import {Router} from '@angular/router';
 
 import {Employee} from '../model';
 
+import { AngularFireAuth } from '@angular/fire/auth';
+
+import { AngularFirestore, docChanges, DocumentChangeType } from '@angular/fire/firestore';
+
+import * as firebase from 'firebase';
+import { Observable } from 'rxjs';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
 
-   count = 0;
+   static count = 0;
+   size:Array<number>=[];
 
-contactList: Array<Employee>  ;
+contactList: Array<Employee>=[]  ;
+idList:Array<string>=[];
 
 active_obj!:any;
 
-constructor(private router: Router) {
-  this.contactList = [];
+constructor(private router: Router,private firestore: AngularFirestore,private afAuth:AngularFireAuth) {
+  //console.log("service first")
+    this.contactList=this.pushData().contactlist
 }
 
-  getData(): {contactlist: Array<Employee>, status: boolean}{
-     if (this.contactList.length === 0){
-        return {contactlist: [], status: false};
-     }
-     else{
-       return {contactlist: this.contactList, status: true};
-     }
+  getData(): Observable<any>{
+     const contactList=new Array<Employee>();
+     return new Observable<any>((sub)=>{
+       this.firestore.collection('employee').get().subscribe((empList)=>{
+          if(empList){
+              empList.forEach((empObject)=>{
+                  const currentemployee=empObject.data() as Employee
+                  currentemployee['key']=empObject.id;
+                 contactList.push(currentemployee)
+              })
+              sub.next(contactList);
+          }
+       });
+     })
   }
 
-  getId(): number{
-     this.count++;
-     return this.count;
+  pushData():{contactlist: Array<Employee>, status: boolean}{
+
+     this.getData().subscribe((array)=>{
+
+         this.contactList=array
+     })
+     if(this.contactList.length===0){
+           return {contactlist:[],status:false}
+     }
+     else{
+        return {contactlist:this.contactList,status:true}
+     }
+
+  }
+
+  getId():number{
+     return this.contactList.length+1
   }
 
   searchContact(id: any): number{
@@ -49,44 +81,49 @@ constructor(private router: Router) {
   }
 
   changeActive(Employeeobject: Employee): void{
-   /* let i = this.statusSearch();
-    if (i !== -1){
-      this.contactList[i].status = false;
-    }*/
-    let i = this.searchContact(Employeeobject.id);
-    this.contactList[i].status = true;
-    var id:number
-    if(this.active_obj!=null){
-       id  = this.active_obj.id;
-       i = this.searchContact(id);
-    }
-   // console.log(id)
-    if (i !== -1){
-      console.log("in the zone")
-      this.contactList[i].status = false;
-    }
 
-    this.active_obj=Employeeobject
+    this.firestore.collection('employee').get().toPromise()
+    .then((empList)=>{
+            empList.forEach((empObject)=>{
+                empObject.ref.update({
+                     status:false
+                })
+            })
+    })
+
+    const object:Employee=this.contactList[this.searchContact(Employeeobject.id)]
+    this.firestore.doc('employee/'+object.key).update({status:true}).then((res)=>{
+      this.contactList=this.pushData().contactlist
+    })
 
   }
 
   addEmployeeData(Employeeobject: Employee): void{
     if (Employeeobject != null){
-      this.contactList.push(Employeeobject);
+      //this.contactList.push(Employeeobject);
+      this.firestore.collection('employee').add({
+          id:Employeeobject.id,
+          status:Employeeobject.status,
+          name:Employeeobject.name,
+          mail:Employeeobject.mail,
+          number:Employeeobject.number,
+          landline:Employeeobject.landline,
+          website:Employeeobject.website,
+          address:Employeeobject.address,
+          address1:Employeeobject.address1,
+          address2:Employeeobject.address2,
+          address3:Employeeobject.address3
+      })
+      this.contactList=this.pushData().contactlist
     }
   }
 
   deleteEmployeeData(Employeeobject: Employee): void{
-     const i = this.searchContact(Employeeobject.id);
-     this.contactList[i].status = false;
-     this.contactList.splice(i, 1);
-     if(this.contactList.length!=0){
-      this.active_obj=this.contactList[0]
-      this.contactList[0].status = true;
-     }
-     else{
-       this.active_obj=null;
-     }
+      this.firestore.doc('employee/'+Employeeobject.key).delete()
+      this.contactList=this.pushData().contactlist
+      if(this.contactList.length!=0){
+          this.contactList[0].status=true
+      }
 
   }
 
@@ -94,11 +131,8 @@ constructor(private router: Router) {
   changeEmployeeData(Employeeobject: Employee): void{
 
     if (Employeeobject != null){
-    const i = this.searchContact(this.active_obj.id);
-    Employeeobject.id = this.contactList[i].id;
-    Employeeobject.status = this.contactList[i].status;
-    this.contactList[i] = Employeeobject;
-    this.active_obj=this.contactList[i] 
+        this.firestore.doc('employee/'+Employeeobject.key).update(Employeeobject)
+        this.contactList=this.pushData().contactlist
     }
 
 

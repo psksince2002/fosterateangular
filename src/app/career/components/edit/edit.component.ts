@@ -68,9 +68,7 @@ export class EditComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.contactList = this.employeeService.getData().contactlist;
-    this.targetObj = this.employeeService.active_obj;
-    console.log(this.targetObj)
+    this.contactList = this.employeeService.pushData().contactlist;
     this.intilaiseForm();
   }
 

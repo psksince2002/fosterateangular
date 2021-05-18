@@ -9,19 +9,23 @@ import {Employee} from '../../model/';
 })
 export class HomeComponent implements OnInit {
 
-  contactList: any = [];
+  contactList!:Employee[] ;
   activeObj!: Employee;
 
   constructor( private employeeService: EmployeeService, private router: Router) {
         // obj.classList.add('active-item')
-        this.contactList = this.employeeService.getData().contactlist;
-        this.activeObj = employeeService.active_obj
-
-
+        this.contactList = this.employeeService.pushData().contactlist;
+        this.activeObj=this.contactList[this.contactList.length-1]
 
   }
 
+
+
   ngOnInit(): void {
+
+
+
+
   }
   intialnavigation(){
     this.router.navigate(['contacts'])
